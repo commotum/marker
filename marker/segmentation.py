@@ -27,6 +27,7 @@ def load_layout_model():
     model = LayoutLMv3ForTokenClassification.from_pretrained(
         settings.LAYOUT_MODEL_NAME,
         torch_dtype=settings.MODEL_DTYPE,
+        cache_dir="/models"
     ).to(settings.TORCH_DEVICE_MODEL)
 
     model.config.id2label = {

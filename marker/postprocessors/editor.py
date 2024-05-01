@@ -14,9 +14,11 @@ def load_editing_model():
         return None
 
     model = T5ForTokenClassification.from_pretrained(
-            settings.EDITOR_MODEL_NAME,
-            torch_dtype=settings.MODEL_DTYPE,
-        ).to(settings.TORCH_DEVICE_MODEL)
+        settings.EDITOR_MODEL_NAME,
+        torch_dtype=settings.MODEL_DTYPE,
+        cache_dir="/models"
+    ).to(settings.TORCH_DEVICE_MODEL)
+
     model.eval()
 
     model.config.label2id = {
@@ -26,6 +28,7 @@ def load_editing_model():
         "space-1": 3,
     }
     model.config.id2label = {v: k for k, v in model.config.label2id.items()}
+
     return model
 
 

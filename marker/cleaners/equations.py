@@ -22,9 +22,13 @@ processor = load_processor()
 
 
 def load_texify_model():
-    texify_model = load_model(checkpoint=settings.TEXIFY_MODEL_NAME, device=settings.TORCH_DEVICE_MODEL, dtype=settings.TEXIFY_DTYPE)
+    texify_model = load_model(
+        checkpoint=settings.TEXIFY_MODEL_NAME,
+        device=settings.TORCH_DEVICE_MODEL,
+        dtype=settings.TEXIFY_DTYPE,
+        cache_dir="/models"
+    )
     return texify_model
-
 
 def mask_bbox(png_image, bbox, selected_bboxes):
     mask = Image.new('L', png_image.size, 0)  # 'L' mode for grayscale

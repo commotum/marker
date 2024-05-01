@@ -19,6 +19,7 @@ def load_ordering_model():
     model = LayoutLMv3ForSequenceClassification.from_pretrained(
         settings.ORDERER_MODEL_NAME,
         torch_dtype=settings.MODEL_DTYPE,
+        cache_dir="/models"
     ).to(settings.TORCH_DEVICE_MODEL)
     model.eval()
     return model
